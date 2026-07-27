@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>iDream廚房｜產品資訊 · 顧客心聲</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;600;700;900&family=Noto+Sans+TC:wght@400;500;600;700&display=swap');
+
+  :root{
+    --paper:#FBF6EE;
+    --paper-deep:#F3EAD9;
+    --ink:#2E2620;
+    --ink-soft:#6B6055;
+    --clay:#B5502F;
+    --clay-deep:#8E3B22;
+    --jade:#4C6B54;
+    --jade-soft:#DCE6DA;
+    --gold:#C99A3E;
+    --line:#DCCFB8;
+    --white:#FFFDF9;
+    --radius:18px;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Noto Sans TC','Noto Serif TC',sans-serif;
+    -webkit-font-smoothing:antialiased;
+    min-height:100vh;
+    padding-bottom:60px;
+  }
+
+  /* ---------- topbar ---------- */
+  .topbar{
+    position:sticky; top:0; z-index:50;
+    background:rgba(251,246,238,.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+    display:flex; align-items:center; gap:10px;
+    padding:14px 20px;
+  }
+  .back-btn{
+    display:none;
+    align-items:center; gap:6px;
+    background:none; border:none;
+    color:var(--clay-deep); font-weight:600; font-size:15px;
+    font-family:'Noto Sans TC',sans-serif;
+    cursor:pointer; padding:6px 4px;
+  }
+  .back-btn svg{width:18px;height:18px;}
+  .topbar-title{
+    font-family:'Noto Serif TC',serif;
+    font-weight:700; font-size:17px; letter-spacing:.04em;
+    color:var(--ink);
+  }
+
+  /* ---------- HOME VIEW ---------- */
+  .hero{
+    padding:38px 22px 30px;
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero::before{
+    content:"";
+    position:absolute; inset:0;
+    background:
+      radial-gradient(circle at 15% 20%, rgba(181,80,47,.07), transparent 40%),
+      radial-gradient(circle at 85% 75%, rgba(76,107,84,.08), transparent 45%);
+    pointer-events:none;
+  }
+  .hero-eyebrow{
+    font-size:12px; letter-spacing:.28em; color:var(--clay);
+    font-weight:700; margin-bottom:14px; position:relative;
+  }
+  .hero-mark{
+    width:56px; height:56px; margin:0 auto 16px;
+    border-radius:50%;
+    background:linear-gradient(150deg,var(--clay),var(--gold));
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Noto Serif TC',serif; font-weight:900; font-size:22px;
+    color:var(--white);
+    box-shadow:0 8px 20px -8px rgba(142,59,34,.5);
+    position:relative;
+  }
+  .hero-logo{
+    display:block; width:auto; height:52px; margin:0 auto 18px;
+    position:relative;
+  }
+  .hero h1{
+    font-family:'Noto Serif TC',serif;
+    font-weight:900; font-size:26px; line-height:1.5;
+    color:var(--ink);
+    position:relative;
+  }
+  .hero p{
+    margin-top:10px; font-size:14px; color:var(--ink-soft);
+    line-height:1.7; position:relative;
+  }
+
+  .impact-wrap{ padding:0 20px 8px; }
+  .impact-card{
+    background:var(--white);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:20px 18px;
+    margin-bottom:14px;
+  }
+  .impact-icon{ font-size:22px; margin-bottom:10px; }
+  .impact-text{
+    font-size:13.5px; line-height:1.85; color:var(--ink);
+  }
+  .impact-text b{ color:var(--clay-deep); font-weight:700; }
+  .sdg-row{
+    display:flex; gap:8px; margin-top:16px; flex-wrap:wrap;
+  }
+  .sdg-badge{
+    flex:1 1 0; min-width:60px; max-width:90px;
+    border-radius:8px;
+    display:block;
+    box-shadow:0 3px 8px -3px rgba(46,38,32,.25);
+  }
+  .sdg-footnote{
+    font-size:10px; color:var(--ink-soft); opacity:.8; line-height:1.7;
+    padding:2px 4px 8px; text-align:center;
+  }
+  .sdg-footnote a{ color:var(--clay-deep); }
+
+  .menu-wrap{ padding:6px 20px 0; }
+  .menu-card{
+    display:flex; align-items:center; gap:16px;
+    background:var(--white);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:20px;
+    margin-bottom:16px;
+    cursor:pointer;
+    text-decoration:none;
+    color:inherit;
+    transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    box-shadow:0 2px 0 rgba(46,38,32,.03);
+  }
+  .menu-card:active{ transform:scale(.98); }
+  .menu-card:hover{ border-color:var(--clay); box-shadow:0 10px 24px -14px rgba(142,59,34,.35); }
+
+  .menu-icon{
+    flex:0 0 auto;
+    width:54px; height:54px; border-radius:14px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .menu-icon svg{ width:26px; height:26px; }
+  .menu-card.type-a .menu-icon{ background:var(--jade-soft); color:var(--jade); }
+  .menu-card.type-b .menu-icon{ background:#F3E2D6; color:var(--clay-deep); }
+
+  .menu-text{ flex:1; min-width:0; }
+  .menu-text .label{
+    font-family:'Noto Serif TC',serif;
+    font-weight:700; font-size:17px; color:var(--ink);
+    margin-bottom:4px;
+  }
+  .menu-text .desc{ font-size:12.5px; color:var(--ink-soft); line-height:1.5; }
+  .menu-arrow{ flex:0 0 auto; color:var(--ink-soft); opacity:.5; }
+  .menu-arrow svg{ width:18px; height:18px; }
+
+  .home-footer{
+    text-align:center; margin-top:30px; padding:0 30px;
+    font-size:11.5px; color:var(--ink-soft); opacity:.75; line-height:1.8;
+  }
+
+  /* ---------- shared section header ---------- */
+  .section-head{
+    padding:22px 22px 4px;
+  }
+  .section-head h2{
+    font-family:'Noto Serif TC',serif; font-weight:900; font-size:21px;
+  }
+  .section-head p{
+    font-size:13px; color:var(--ink-soft); margin-top:6px; line-height:1.6;
+  }
+
+  /* ---------- VIEW SWITCH ---------- */
+  .view{ display:none; }
+  .view.active{ display:block; animation:fadeIn .35s ease; }
+  @keyframes fadeIn{ from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);} }
+
+  /* ---------- PRODUCTS VIEW ---------- */
+  .cat-scroller{
+    display:flex; gap:8px; overflow-x:auto;
+    padding:14px 20px 4px;
+    scrollbar-width:none;
+  }
+  .cat-scroller::-webkit-scrollbar{ display:none; }
+  .chip{
+    flex:0 0 auto;
+    font-size:13px; font-weight:600;
+    padding:9px 16px;
+    border-radius:100px;
+    background:var(--white);
+    border:1px solid var(--line);
+    color:var(--ink-soft);
+    cursor:pointer;
+    white-space:nowrap;
+    transition:all .15s ease;
+  }
+  .chip.active{
+    background:var(--clay); border-color:var(--clay); color:var(--white);
+  }
+  .chip.disabled{
+    opacity:.45; cursor:default;
+  }
+
+  .product-list{ padding:16px 20px 10px; }
+
+  .product-group{ display:none; flex-direction:column; gap:14px; }
+  .product-group.active{ display:flex; }
+
+  .product-card{
+    background:var(--white);
+    border:1px solid var(--line);
+    border-radius:16px;
+    overflow:hidden;
+  }
+  .product-head{
+    display:flex; align-items:center; gap:14px;
+    padding:16px;
+  }
+  .product-thumb{
+    flex:0 0 auto; width:56px; height:56px; border-radius:12px;
+    background:var(--paper-deep);
+    display:flex; align-items:center; justify-content:center;
+    font-size:22px;
+    overflow:hidden;
+  }
+  .product-thumb img{ width:100%; height:100%; object-fit:cover; }
+  .product-summary-text{ flex:1; min-width:0; }
+  .product-summary-text .pname{ font-weight:700; font-size:15px; }
+  .product-summary-text .ptag{ font-size:12px; color:var(--ink-soft); margin-top:3px; }
+
+  .product-body{
+    padding:0 16px 20px;
+    border-top:1px solid var(--paper-deep);
+  }
+  .product-body .desc-block{
+    font-size:13.5px; line-height:1.8; color:var(--ink); padding-top:14px;
+  }
+  .nutrition{
+    margin-top:16px;
+    background:var(--paper-deep);
+    border-radius:12px;
+    padding:14px 16px;
+  }
+  .nutrition-title{
+    font-size:12px; font-weight:700; color:var(--clay-deep);
+    letter-spacing:.06em; margin-bottom:8px;
+    display:flex; align-items:center; gap:6px;
+  }
+  table.nutri-table{ width:100%; border-collapse:collapse; font-size:12.5px; }
+  table.nutri-table th{
+    text-align:left; font-weight:600; color:var(--ink-soft);
+    padding:6px 0; border-bottom:1px solid var(--line); font-size:11.5px;
+  }
+  table.nutri-table td{
+    padding:7px 0; border-bottom:1px dashed var(--line); color:var(--ink);
+  }
+  table.nutri-table tr:last-child td{ border-bottom:none; }
+  .nutri-note{ font-size:11px; color:var(--ink-soft); margin-top:8px; line-height:1.6; }
+  .allergen-tags{ display:flex; flex-wrap:wrap; gap:6px; margin-top:12px; }
+  .allergen-tag{
+    font-size:11px; background:var(--white); border:1px solid var(--line);
+    padding:4px 10px; border-radius:100px; color:var(--ink-soft); font-weight:600;
+  }
+
+  .coming-soon{
+    display:none;
+    text-align:center;
+    padding:60px 30px;
+    color:var(--ink-soft);
+  }
+  .coming-soon.active{ display:block; }
+  .coming-soon-icon{ font-size:30px; margin-bottom:12px; }
+  .coming-soon-title{
+    font-family:'Noto Serif TC',serif; font-weight:700; font-size:16px;
+    color:var(--ink); margin-bottom:6px;
+  }
+  .coming-soon-text{ font-size:13px; line-height:1.7; }
+
+  /* nutrition label image (cropped from 3-up source image) */
+  .nutrition-img-wrap{
+    margin-top:16px;
+    border-radius:12px;
+    overflow:hidden;
+    width:100%;
+    aspect-ratio:512 / 1024;
+    position:relative;
+    background:var(--paper-deep);
+  }
+  .nutrition-img{
+    position:absolute;
+    top:0; left:0;
+    width:300%;
+    max-width:none;
+    height:100%;
+    object-fit:cover;
+  }
+  .nutrition-img[data-crop="0"]{ left:0%; }
+  .nutrition-img[data-crop="1"]{ left:-100%; }
+  .nutrition-img[data-crop="2"]{ left:-200%; }
+
+  /* reheat guide card */
+  .reheat-card{
+    background:var(--white);
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:18px;
+    margin-top:4px;
+  }
+  .reheat-title{
+    font-family:'Noto Serif TC',serif; font-weight:700; font-size:15px;
+    color:var(--clay-deep); margin-bottom:12px;
+  }
+  .reheat-img{
+    width:100%; border-radius:10px; display:block;
+  }
+  .reheat-disclaimer{
+    font-size:11px; color:var(--ink-soft); line-height:1.7;
+    margin-top:10px; padding:8px 10px;
+    background:var(--paper-deep); border-radius:8px;
+  }
+
+  /* ---------- FEEDBACK VIEW ---------- */
+  .fb-cat-grid{
+    padding:16px 20px 6px;
+    display:grid; grid-template-columns:1fr 1fr; gap:10px;
+  }
+  .fb-cat-card{
+    background:var(--white); border:1px solid var(--line); border-radius:14px;
+    padding:14px 12px; text-align:center; cursor:pointer;
+    transition:transform .15s ease, border-color .15s ease;
+  }
+  .fb-cat-card:active{ transform:scale(.97); }
+  .fb-cat-card.active{ border-color:var(--jade); background:var(--jade-soft); }
+  .fb-cat-emoji{ font-size:22px; margin-bottom:6px; }
+  .fb-cat-name{ font-size:12.5px; font-weight:700; line-height:1.4; }
+  .fb-cat-count{ font-size:10.5px; color:var(--ink-soft); margin-top:2px; }
+
+  .fb-masonry{
+    padding:18px 20px 10px;
+    columns:2; column-gap:12px;
+  }
+  .fb-item{
+    break-inside:avoid; margin-bottom:12px;
+    background:var(--white); border:1px solid var(--line); border-radius:14px;
+    overflow:hidden; cursor:pointer;
+  }
+  .fb-item img{ width:100%; display:block; }
+  .fb-item .fb-cap{
+    padding:9px 10px 11px;
+    font-size:11px; color:var(--ink-soft); line-height:1.5;
+  }
+  .fb-item .fb-cap b{ color:var(--ink); font-weight:700; }
+
+  .fb-empty{
+    padding:50px 30px; text-align:center; color:var(--ink-soft); font-size:13px; line-height:1.8;
+  }
+
+  /* lightbox */
+  .lightbox{
+    position:fixed; inset:0; background:rgba(28,22,16,.92);
+    z-index:200; display:none; align-items:center; justify-content:center;
+    padding:30px 20px;
+  }
+  .lightbox.active{ display:flex; }
+  .lightbox img{
+    max-width:100%; max-height:80vh; border-radius:10px;
+    box-shadow:0 20px 60px rgba(0,0,0,.5);
+  }
+  .lightbox-close{
+    position:absolute; top:20px; right:20px;
+    width:38px; height:38px; border-radius:50%;
+    background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.25);
+    color:#fff; font-size:18px; display:flex; align-items:center; justify-content:center;
+    cursor:pointer;
+  }
+
+  @media (min-width:600px){
+    body{ max-width:480px; margin:0 auto; box-shadow:0 0 40px rgba(0,0,0,.06); min-height:100vh; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <button class="back-btn" id="backBtn" onclick="goHome()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
+    返回
+  </button>
+  <div class="topbar-title" id="topbarTitle">iDream廚房</div>
+</div>
+
+<!-- ============ HOME ============ -->
+<div class="view active" id="view-home">
+  <div class="hero">
+    <div class="hero-eyebrow">好放心飲食 · iDream cuisine</div>
+    <img class="hero-logo" src="logo.jpeg" alt="iDream cuisine">
+    <h1>喵老師醜蔬果手作</h1>
+  </div>
+
+  <div class="impact-wrap">
+    <div class="impact-card">
+      <div class="impact-icon">🥕</div>
+      <p class="impact-text">過去的 11 個月，喵老師拯救了超過 <b>500kg</b> 的醜蔬果。未來，請持續購買醜蔬果手作，我們一起拯救更多醜蔬果，減少資源浪費，減少污染，增加農民收益，支持友善耕作。</p>
+      <div class="sdg-row">
+        <img class="sdg-badge" src="sdg2.png" alt="SDG 2 消除飢餓">
+        <img class="sdg-badge" src="sdg12.png" alt="SDG 12 責任消費及生產">
+        <img class="sdg-badge" src="sdg13.png" alt="SDG 13 氣候行動">
+        <img class="sdg-badge" src="sdg15.png" alt="SDG 15 保育陸域生態">
+      </div>
+    </div>
+
+    <div class="impact-card">
+      <div class="impact-icon">🎋</div>
+      <p class="impact-text">我們今年增加文化永續傳承概念，把爸爸的家鄉味，繼續傳承給更多人，不論是我們的下一代或者是外國朋友們，台灣小吃的滋味一定要永流傳。</p>
+      <div class="sdg-row">
+        <img class="sdg-badge" src="sdg4.png" alt="SDG 4 優質教育">
+        <img class="sdg-badge" src="sdg11.png" alt="SDG 11 永續城鄉">
+      </div>
+    </div>
+
+    <div class="sdg-footnote">SDG 圖示引用聯合國永續發展目標官方素材，詳見 <a href="https://www.un.org/sustainabledevelopment" target="_blank" rel="noopener">un.org/sustainabledevelopment</a></div>
+  </div>
+
+  <div class="menu-wrap">
+    <a class="menu-card type-a" href="#products" onclick="showView('products')">
+      <div class="menu-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 19.5V4.5c0-.55.45-1 1-1h10.5L20 7v12.5c0 .55-.45 1-1 1H5c-.55 0-1-.45-1-1Z"/>
+          <path d="M14.5 3.5V8h5"/>
+          <path d="M8 12h8M8 15.5h8M8 8.5h3"/>
+        </svg>
+      </div>
+      <div class="menu-text">
+        <div class="label">產品說明（含營養標示）</div>
+        <div class="desc">食材來源、料理方式與完整營養成分</div>
+      </div>
+      <div class="menu-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><polyline points="9 6 15 12 9 18"/></svg></div>
+    </a>
+
+    <a class="menu-card type-b" href="#feedback" onclick="showView('feedback')">
+      <div class="menu-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.4H4.6a1 1 0 0 1-.85-1.52l1.3-2.14A8.4 8.4 0 1 1 21 11.5Z"/>
+          <circle cx="8.5" cy="11.5" r=".9" fill="currentColor" stroke="none"/>
+          <circle cx="12" cy="11.5" r=".9" fill="currentColor" stroke="none"/>
+          <circle cx="15.5" cy="11.5" r=".9" fill="currentColor" stroke="none"/>
+        </svg>
+      </div>
+      <div class="menu-text">
+        <div class="label">顧客回饋</div>
+        <div class="desc">真實訂購對話與心得分享</div>
+      </div>
+      <div class="menu-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><polyline points="9 6 15 12 9 18"/></svg></div>
+    </a>
+  </div>
+
+  <div class="home-footer">如有飲食限制或過敏原疑問，歡迎直接於官方 LINE 詢問喵老師</div>
+</div>
+
+<!-- ============ PRODUCTS ============ -->
+<div class="view" id="view-products">
+  <div class="section-head">
+    <h2>產品說明</h2>
+    <p>點選分類即可看完整內容說明與營養標示以及保存與加熱方式</p>
+  </div>
+
+  <div class="cat-scroller" id="prodCats">
+    <div class="chip disabled" data-cat="radish">港式蘿蔔糕</div>
+    <div class="chip disabled" data-cat="zongzi">姚奶奶的廣東粽</div>
+    <div class="chip disabled" data-cat="drink">飲品系列</div>
+    <div class="chip active" data-cat="soup">雞湯系列</div>
+    <div class="chip" data-cat="bread">麵包與甜點系列</div>
+    <div class="chip disabled" data-cat="catering">外燴系列</div>
+    <div class="chip disabled" data-cat="other">其他</div>
+  </div>
+
+  <div class="product-list" id="productList">
+    <!-- ⬇⬇ 每個分類一個 .product-group，ready="true" 的分類才會顯示內容 -->
+
+    <div class="product-group" data-group="radish" data-ready="false"></div>
+
+    <div class="product-group" data-group="zongzi" data-ready="false"></div>
+
+    <div class="product-group" data-group="drink" data-ready="false"></div>
+
+    <div class="product-group" data-group="soup" data-ready="true">
+      <div class="product-card">
+        <div class="product-head">
+          <div class="product-thumb">🍲</div>
+          <div class="product-summary-text">
+            <div class="pname">品項名稱（範例）</div>
+            <div class="ptag">冷凍 · 規格</div>
+          </div>
+        </div>
+        <div class="product-body">
+          <div class="desc-block">【產品說明範例文字，請替換成實際內容】</div>
+          <div class="nutrition">
+            <div class="nutrition-title">📋 營養標示</div>
+            <table class="nutri-table">
+              <thead><tr><th>項目</th><th>含量</th></tr></thead>
+              <tbody>
+                <tr><td>熱量</td><td>— kcal</td></tr>
+                <tr><td>蛋白質</td><td>— g</td></tr>
+                <tr><td>鈉</td><td>— mg</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-group" data-group="bread" data-ready="true">
+
+      <div class="product-card">
+        <div class="product-head">
+          <div class="product-thumb">🧅</div>
+          <div class="product-summary-text">
+            <div class="pname">車城醜洋蔥鹹豬肉佛卡夏</div>
+            <div class="ptag">每份 180g</div>
+          </div>
+        </div>
+        <div class="product-body">
+          <div class="desc-block">
+            「車城」醜洋蔥與芥花油低溫油封，再鋪上炒好的鹹豬肉，於卡夏麵團上鋪滿油封洋蔥以及洋蔥蔥油與鹹豬肉，再撒上義大利綜合香料與少許黑胡椒以及日本海鹽，烤至表皮微酥、內裡鬆軟，鹹香中帶著洋蔥的自然回甘。
+            <br><br><b>成分：</b>CAS鹹豬肉、車城洋蔥、冷壓芥花油、冷壓橄欖油（原裝進口）、日本海鹽、無添加高筋麵粉、酵母粉、蜂蜜、水
+            <br><br><b>過敏原資訊：</b>本產品含有麩質之穀物。生產設備亦處理大豆、堅果類及其製品。
+          </div>
+          <div class="nutrition-img-wrap">
+            <img src="focaccia-nutrition.png" alt="車城醜洋蔥鹹豬肉佛卡夏營養標示" class="nutrition-img" data-crop="0">
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-head">
+          <div class="product-thumb">🍄</div>
+          <div class="product-summary-text">
+            <div class="pname">車程醜洋蔥野菇佛卡夏（蔬食）</div>
+            <div class="ptag">每份 180g · 蔬食</div>
+          </div>
+        </div>
+        <div class="product-body">
+          <div class="desc-block">
+            車城洋蔥與有機鴻禧菇利用低溫油封，鋪在手工麵團上，再撒上蔥油與義大利香料、日本海鹽烘烤，菇香與洋蔥甜味交織，口感濕潤紮實，適合蔬食朋友享用。
+            <br><br><b>成分：</b>車城洋蔥、有機鴻禧菇、冷壓芥花油、冷壓橄欖油、日本海鹽、無添加高筋麵粉、酵母粉、蜂蜜、水
+            <br><br><b>過敏原資訊：</b>本產品含有麩質之穀物。生產設備亦處理大豆、堅果類及其製品。
+          </div>
+          <div class="nutrition-img-wrap">
+            <img src="focaccia-nutrition.png" alt="車程醜洋蔥野菇佛卡夏營養標示" class="nutrition-img" data-crop="1">
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-head">
+          <div class="product-thumb">🍅</div>
+          <div class="product-summary-text">
+            <div class="pname">番茄紫蘇佛卡夏</div>
+            <div class="ptag">每份 180g</div>
+          </div>
+        </div>
+        <div class="product-body">
+          <div class="desc-block">
+            小番茄、紫蘇及蒜頭以冷壓橄欖油浸漬並低溫油封，整顆小番茄與新鮮紫蘇葉鋪滿麵團表面，佐以蒜頭與風味橄欖油提香烘烤，酸香清爽，紫蘇的香氣讓整片佛卡夏更有層次。
+            <br><br><b>成分：</b>小番茄、蒜頭、紫蘇葉、冷壓橄欖油、日本海鹽、無添加高筋麵粉、酵母粉、蜂蜜、水
+            <br><br><b>過敏原資訊：</b>本產品含有麩質之穀物。生產設備亦處理大豆、堅果類及其製品。
+          </div>
+          <div class="nutrition-img-wrap">
+            <img src="focaccia-nutrition.png" alt="番茄紫蘇佛卡夏營養標示" class="nutrition-img" data-crop="2">
+          </div>
+        </div>
+      </div>
+
+      <div class="reheat-card">
+        <div class="reheat-title">🔥 加熱方式</div>
+        <img src="reheat-guide.png" alt="佛卡夏復熱方式：烤箱與電鍋復熱步驟圖" class="reheat-img">
+        <div class="reheat-disclaimer">僅供參考，各廠牌烤箱參數不一定，請務必依現場狀況調整。</div>
+      </div>
+
+    </div>
+
+    <div class="product-group" data-group="catering" data-ready="false"></div>
+
+    <div class="product-group" data-group="other" data-ready="false"></div>
+
+    <div class="coming-soon" id="comingSoon">
+      <div class="coming-soon-icon">🌱</div>
+      <div class="coming-soon-title">內容準備中</div>
+      <div class="coming-soon-text">這個分類的產品說明還在整理，敬請期待</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ FEEDBACK ============ -->
+<div class="view" id="view-feedback">
+  <div class="section-head">
+    <h2>顧客回饋</h2>
+    <p>來自 LINE 訂購對話的真實心得，點選分類查看</p>
+  </div>
+
+  <div class="fb-cat-grid" id="fbCats">
+    <div class="fb-cat-card active" data-fbcat="all">
+      <div class="fb-cat-emoji">💬</div>
+      <div class="fb-cat-name">全部</div>
+      <div class="fb-cat-count" id="count-all">0 則</div>
+    </div>
+    <div class="fb-cat-card" data-fbcat="radish">
+      <div class="fb-cat-emoji">🥕</div>
+      <div class="fb-cat-name">港式蘿蔔糕</div>
+      <div class="fb-cat-count" id="count-radish">0 則</div>
+    </div>
+    <div class="fb-cat-card" data-fbcat="zongzi">
+      <div class="fb-cat-emoji">🎋</div>
+      <div class="fb-cat-name">姚奶奶的廣東粽</div>
+      <div class="fb-cat-count" id="count-zongzi">0 則</div>
+    </div>
+    <div class="fb-cat-card" data-fbcat="drink">
+      <div class="fb-cat-emoji">🥤</div>
+      <div class="fb-cat-name">飲品系列</div>
+      <div class="fb-cat-count" id="count-drink">0 則</div>
+    </div>
+    <div class="fb-cat-card" data-fbcat="soup">
+      <div class="fb-cat-emoji">🍲</div>
+      <div class="fb-cat-name">雞湯系列</div>
+      <div class="fb-cat-count" id="count-soup">0 則</div>
+    </div>
+    <div class="fb-cat-card" data-fbcat="bread">
+      <div class="fb-cat-emoji">🍞</div>
+      <div class="fb-cat-name">麵包與甜點系列</div>
+      <div class="fb-cat-count" id="count-bread">0 則</div>
+    </div>
+    <div class="fb-cat-card" data-fbcat="catering">
+      <div class="fb-cat-emoji">🍱</div>
+      <div class="fb-cat-name">外燴系列</div>
+      <div class="fb-cat-count" id="count-catering">0 則</div>
+    </div>
+    <div class="fb-cat-card" data-fbcat="other">
+      <div class="fb-cat-emoji">✨</div>
+      <div class="fb-cat-name">其他</div>
+      <div class="fb-cat-count" id="count-other">0 則</div>
+    </div>
+  </div>
+
+  <div class="fb-masonry" id="fbMasonry">
+    <!-- 圖片由 JS 依 feedbackData 產生 -->
+  </div>
+  <div class="fb-empty" id="fbEmpty" style="display:none;">這個分類還沒有回饋截圖<br>敬請期待 🌱</div>
+</div>
+
+<div class="lightbox" id="lightbox">
+  <div class="lightbox-close" onclick="closeLightbox()">✕</div>
+  <img id="lightboxImg" src="" alt="顧客回饋截圖放大">
+</div>
+
+<script>
+  // ============================================================
+  // 顧客回饋資料：每張截圖一筆。cat 對應下面 7 個分類 key。
+  // 之後你只要把 img 換成實際截圖檔名/連結，caption 可留白或加一句重點。
+  // ============================================================
+  const feedbackData = [
+    { cat:"radish",   img:"https://placehold.co/400x520/F3EAD9/8E3B22?text=蘿蔔糕+回饋+01", caption:"「外酥內軟，跟茶樓吃到的一樣！」" },
+    { cat:"radish",   img:"https://placehold.co/400x600/F3EAD9/8E3B22?text=蘿蔔糕+回饋+02", caption:"" },
+    { cat:"zongzi",   img:"https://placehold.co/400x560/F3EAD9/8E3B22?text=廣東粽+回饋+01", caption:"「吃到小時候阿嬤包的味道」" },
+    { cat:"zongzi",   img:"https://placehold.co/400x480/F3EAD9/8E3B22?text=廣東粽+回饋+02", caption:"" },
+    { cat:"drink",    img:"https://placehold.co/400x540/F3EAD9/8E3B22?text=飲品+回饋+01", caption:"" },
+    { cat:"soup",     img:"https://placehold.co/400x600/F3EAD9/8E3B22?text=雞湯+回饋+01", caption:"「感冒的時候喝真的很暖」" },
+    { cat:"bread",    img:"https://placehold.co/400x500/F3EAD9/8E3B22?text=麵包甜點+回饋+01", caption:"" },
+    { cat:"catering", img:"https://placehold.co/400x560/F3EAD9/8E3B22?text=外燴+回饋+01", caption:"「同事都問是哪裡訂的」" },
+    { cat:"other",    img:"https://placehold.co/400x480/F3EAD9/8E3B22?text=其他+回饋+01", caption:"" },
+  ];
+
+  const catLabels = {
+    radish:"港式蘿蔔糕", zongzi:"姚奶奶的廣東粽", drink:"飲品系列",
+    soup:"雞湯系列", bread:"麵包與甜點系列", catering:"外燴系列", other:"其他"
+  };
+
+  function renderCounts(){
+    document.getElementById("count-all").textContent = feedbackData.length + " 則";
+    Object.keys(catLabels).forEach(k=>{
+      const n = feedbackData.filter(f=>f.cat===k).length;
+      const el = document.getElementById("count-"+k);
+      if(el) el.textContent = n + " 則";
+    });
+  }
+
+  function renderFeedback(filter){
+    const wrap = document.getElementById("fbMasonry");
+    const empty = document.getElementById("fbEmpty");
+    const items = filter==="all" ? feedbackData : feedbackData.filter(f=>f.cat===filter);
+    wrap.innerHTML = "";
+    if(items.length===0){
+      empty.style.display = "block";
+      wrap.style.display = "none";
+      return;
+    }
+    empty.style.display = "none";
+    wrap.style.display = "block";
+    items.forEach(item=>{
+      const div = document.createElement("div");
+      div.className = "fb-item";
+      div.onclick = ()=>openLightbox(item.img);
+      div.innerHTML = `
+        <img src="${item.img}" alt="${catLabels[item.cat]}顧客回饋截圖" loading="lazy">
+        ${item.caption ? `<div class="fb-cap"><b>${catLabels[item.cat]}</b><br>${item.caption}</div>` : `<div class="fb-cap">${catLabels[item.cat]}</div>`}
+      `;
+      wrap.appendChild(div);
+    });
+  }
+
+  document.getElementById("fbCats").addEventListener("click", (e)=>{
+    const card = e.target.closest(".fb-cat-card");
+    if(!card) return;
+    document.querySelectorAll(".fb-cat-card").forEach(c=>c.classList.remove("active"));
+    card.classList.add("active");
+    renderFeedback(card.dataset.fbcat);
+  });
+
+  function openLightbox(src){
+    document.getElementById("lightboxImg").src = src;
+    document.getElementById("lightbox").classList.add("active");
+  }
+  function closeLightbox(){
+    document.getElementById("lightbox").classList.remove("active");
+  }
+  document.getElementById("lightbox").addEventListener("click",(e)=>{
+    if(e.target.id==="lightbox") closeLightbox();
+  });
+
+  renderCounts();
+  renderFeedback("all");
+
+  // ============================================================
+  // 產品分類篩選：點分類直接顯示該分類完整內容；
+  // 尚未完成的分類（disabled）點擊無反應，維持目前畫面
+  // ============================================================
+  function showProductCat(cat){
+    document.querySelectorAll("#prodCats .chip").forEach(c=>{
+      c.classList.toggle("active", c.dataset.cat===cat);
+    });
+    document.querySelectorAll(".product-group").forEach(g=>{
+      g.classList.toggle("active", g.dataset.group===cat && g.dataset.ready==="true");
+    });
+  }
+
+  document.getElementById("prodCats").addEventListener("click",(e)=>{
+    const chip = e.target.closest(".chip");
+    if(!chip) return;
+    if(chip.classList.contains("disabled")) return; // 尚未完成的分類：不切換畫面
+    showProductCat(chip.dataset.cat);
+  });
+
+  // 預設顯示雞湯系列
+  showProductCat("soup");
+
+  // ============================================================
+  // 首頁 <-> 子頁切換
+  // ============================================================
+  function showView(name){
+    document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));
+    document.getElementById("view-"+name).classList.add("active");
+    document.getElementById("backBtn").style.display = "flex";
+    document.getElementById("topbarTitle").textContent = name==="products" ? "產品說明" : "顧客回饋";
+    window.scrollTo(0,0);
+  }
+  function goHome(){
+    document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));
+    document.getElementById("view-home").classList.add("active");
+    document.getElementById("backBtn").style.display = "none";
+    document.getElementById("topbarTitle").textContent = "iDream廚房";
+    window.scrollTo(0,0);
+  }
+</script>
+
+</body>
+</html>
